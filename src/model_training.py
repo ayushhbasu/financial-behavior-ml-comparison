@@ -50,10 +50,7 @@ def load_data():
 # ── 2. Align & shift ──────────────────────────────────────────────────────────
 
 def align_and_shift(features, target):
-    """
-    Shift target +1 day: today's features predict tomorrow's regime.
-    This is the correct framing for a real trading system.
-    """
+   
     target_next = target.shift(-1).dropna().astype(int)
     common      = features.index.intersection(target_next.index)
     return features.loc[common], target_next.loc[common]
@@ -68,11 +65,7 @@ def ts_split(X, y, ratio=TRAIN_RATIO):
 # ── 4. Models ─────────────────────────────────────────────────────────────────
 
 def build_models():
-    """
-    Both models wrapped in a Pipeline with StandardScaler.
-    Scaler is fitted on train set only inside cross_val_score — no leakage.
-    """
-    lr = Pipeline([
+  lr = Pipeline([
         ("scaler", StandardScaler()),
         ("clf", LogisticRegression(
             C=0.5,
