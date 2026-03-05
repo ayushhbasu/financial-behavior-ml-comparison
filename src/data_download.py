@@ -21,10 +21,10 @@ def download_data():
         auto_adjust=False
     )
 
-    # Keep only Adjusted Close
+    # Keeping only Adjusted Close
     adj_close = data["Adj Close"].copy()
 
-    # Drop missing values
+    # Droping the missing value
     adj_close.dropna(inplace=True)
 
     print("Download complete.")
@@ -34,7 +34,7 @@ def download_data():
 
 
 # -----------------------------
-# Save Data
+# Saveing Data
 # -----------------------------
 def save_data(df):
     output_path = "data/raw/price_data.csv"
