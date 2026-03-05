@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # -----------------------------
-# Load Data
+#  Data
 # -----------------------------
 def load_data(path: str = "data/raw/price_data.csv") -> pd.DataFrame:
     df = pd.read_csv(path, parse_dates=["Date"], index_col="Date")
@@ -43,7 +43,7 @@ def create_features(df: pd.DataFrame) -> pd.DataFrame:
     return features
 
 # -----------------------------
-# Save Features
+# Saving the Features
 # -----------------------------
 def save_features(features: pd.DataFrame,
                   path: str = "data/processed/features.csv") -> None:
