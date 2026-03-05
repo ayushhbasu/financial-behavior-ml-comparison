@@ -1,18 +1,15 @@
 import pandas as pd
 import numpy as np
 
-# -----------------------------
 # Load Price Data
-# -----------------------------
 def load_data(filepath: str = "data/raw/price_data.csv") -> pd.DataFrame:
     df = pd.read_csv(filepath, parse_dates=["Date"], index_col="Date")
     if "SPY" not in df.columns:
         raise ValueError("Expected 'SPY' column not found in data.")
     return df
 
-# -----------------------------
+
 # Construct Target (Regimes)
-# -----------------------------
 def create_target(df: pd.DataFrame) -> pd.Series:
     # Log returns
     returns = np.log(df["SPY"] / df["SPY"].shift(1))
@@ -36,9 +33,8 @@ def create_target(df: pd.DataFrame) -> pd.Series:
     )
     return regimes
 
-# -----------------------------
+
 # Save Target
-# -----------------------------
 def save_target(regimes: pd.Series,
                 output_path: str = "data/processed/target.csv") -> None:
     regimes.to_csv(output_path, header=True)
@@ -51,9 +47,8 @@ def save_target(regimes: pd.Series,
     for name, cnt in dist.items():
         print(f"  {name:>6}: {cnt:4d}  ({100*cnt/total:.1f}%)")
 
-# -----------------------------
+
 # Main
-# -----------------------------
 if __name__ == "__main__":
     df      = load_data()
     regimes = create_target(df)
